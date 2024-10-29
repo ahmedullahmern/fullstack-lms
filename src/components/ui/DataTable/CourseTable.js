@@ -4,10 +4,10 @@
 import { useState } from "react"
 
 import {
-    // ColumnDef,
-    // ColumnFiltersState,
-    // SortingState,
-    // VisibilityState,
+    ColumnDef,
+    ColumnFiltersState,
+    SortingState,
+    VisibilityState,
     flexRender,
     getCoreRowModel,
     getFilteredRowModel,
@@ -41,34 +41,26 @@ import {
 const data = [
     {
         id: "m5gr84i9",
-        amount: 316,
-        status: "success",
-        email: "ken99@yahoo.com",
-    },
-    {
-        id: "3u1reuv4",
-        amount: 242,
-        status: "success",
-        email: "Abe45@gmail.com",
+        course: "Web and App Development",
+        status: "active",
+        duraction: "1 Year",
+        description: "Make Student complete Web And App developer from scratch.",
     },
     {
         id: "derv1ws0",
-        amount: 837,
-        status: "processing",
-        email: "Monserrat44@gmail.com",
+        course: "App Development",
+        status: "active",
+        duraction: "4 Months",
+        description: "Make Web Developer also App developer",
     },
     {
         id: "5kma53ae",
-        amount: 874,
-        status: "success",
-        email: "Silas22@gmail.com",
+        course: "Python Development",
+        status: "active",
+        duraction: "1 Year",
+        description: "Learn Python for scratch",
     },
-    {
-        id: "bhqecj4p",
-        amount: 721,
-        status: "failed",
-        email: "carmella@hotmail.com",
-    },
+
 ]
 
 
@@ -97,46 +89,54 @@ export const columns = [
     },
     {
         accessorKey: "status",
-        header: "Status",
+        header: "status",
         cell: ({ row }) => (
-            <div className="capitalize">{row.getValue("status")}</div>
+            <div className="capitalize ">{row.getValue("status")}</div>
         ),
     },
     {
-        accessorKey: "email",
+        accessorKey: "course",
         header: ({ column }) => {
             return (
                 <Button
-                    variant="ghost"
-                    onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+                    variant="course"
+                    onClick={() => column.toggleSorting(column.getIsSorted() === "course")}
                 >
-                    Email
+                    <div className="text-right">Course</div>
                     <ArrowUpDown className="ml-2 h-4 w-4" />
                 </Button>
             )
         },
-        cell: ({ row }) => <div className="lowercase">{row.getValue("email")}</div>,
+        cell: ({ row }) => <div>{row.getValue("course")}</div>,
     },
     {
-        accessorKey: "amount",
-        header: () => <div className="text-right">Amount</div>,
+        accessorKey: "description",
+        header: ({ column }) => {
+            return (
+                <Button
+                    variant="description"
+                    onClick={() => column.toggleSorting(column.getIsSorted() === "description")}
+                >
+                    <div className="text-right">description</div>
+                    <ArrowUpDown className="ml-2 h-4 w-4" />
+                </Button>
+            )
+        },
+        cell: ({ row }) => <div>{row.getValue("description")}</div>,
+    },
+    {
+        accessorKey: "duraction",
+        header: () => <div className="text-right">Duration</div>,
         cell: ({ row }) => {
-            const amount = parseFloat(row.getValue("amount"))
-
-            // Format the amount as a dollar amount
-            const formatted = new Intl.NumberFormat("en-US", {
-                style: "currency",
-                currency: "USD",
-            }).format(amount)
-
-            return <div className="text-right font-medium">{formatted}</div>
+            const amount = row.getValue("duraction")
+            return <div className="text-right font-medium">{amount}</div>
         },
     },
     {
         id: "actions",
         enableHiding: false,
         cell: ({ row }) => {
-            const payment = row.original
+            const course = row.original
 
             return (
                 <DropdownMenu>
@@ -147,15 +147,15 @@ export const columns = [
                         </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="end">
-                        <DropdownMenuLabel>Actions</DropdownMenuLabel>
+                        <DropdownMenuLabel>Courses</DropdownMenuLabel>
                         <DropdownMenuItem
-                            onClick={() => navigator.clipboard.writeText(payment.id)}
+                            onClick={() => navigator.clipboard.writeText(course.id)}
                         >
-                            Copy payment ID
+                            Copy Course
                         </DropdownMenuItem>
                         <DropdownMenuSeparator />
-                        <DropdownMenuItem>View customer</DropdownMenuItem>
-                        <DropdownMenuItem>View payment details</DropdownMenuItem>
+                        <DropdownMenuItem>View Detailes</DropdownMenuItem>
+                        <DropdownMenuItem>Change Status</DropdownMenuItem>
                     </DropdownMenuContent>
                 </DropdownMenu>
             )
@@ -193,10 +193,10 @@ export function CourseDataTable() {
         <div className="w-full">
             <div className="flex items-center py-4">
                 <Input
-                    placeholder="Filter emails..."
-                    value={(table.getColumn("email")?.getFilterValue()) ?? ""}
+                    placeholder="Filter course..."
+                    value={(table.getColumn("course")?.getFilterValue()) ?? ""}
                     onChange={(event) =>
-                        table.getColumn("email")?.setFilterValue(event.target.value)
+                        table.getColumn("course")?.setFilterValue(event.target.value)
                     }
                     className="max-w-sm"
                 />
