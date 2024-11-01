@@ -36,7 +36,7 @@ import {
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 
-export function CourseAddDailods() {
+export function BatchAddDailods() {
     const [open, setOpen] = useState(false)
     const isDesktop = true
 
@@ -44,11 +44,11 @@ export function CourseAddDailods() {
         return (
             <Dialog open={open} onOpenChange={setOpen}>
                 <DialogTrigger asChild>
-                    <Button variant="outline" className="px-7">Add Course</Button>
+                    <Button variant="outline" className="px-7">Add Batch</Button>
                 </DialogTrigger>
                 <DialogContent className="sm:max-w-[425px]">
                     <DialogHeader>
-                        <DialogTitle>Add Course</DialogTitle>
+                        <DialogTitle>Add Batch</DialogTitle>
                         {/* <DialogDescription>
                             Make changes to your profile here. Click save when you're done.
                         </DialogDescription> */}
@@ -66,9 +66,9 @@ export function CourseAddDailods() {
             </DrawerTrigger>
             <DrawerContent>
                 <DrawerHeader className="text-left">
-                    <DrawerTitle>Add Course</DrawerTitle>
+                    <DrawerTitle>Add Batch</DrawerTitle>
                     <DrawerDescription>
-                        You Can Add Course her.
+                        You Can Add Batch her.
                     </DrawerDescription>
                 </DrawerHeader>
                 <ProfileForm className="px-4" />
@@ -86,30 +86,54 @@ function ProfileForm({ className }) {
     return (
         <form className={cn("grid items-start gap-4", className)}>
             <div className="grid gap-2">
-                <Label htmlFor="course">Course</Label>
-                <Input required type="text" id="course" defaultValue="" />
+                <Label htmlFor="batchname">Course Name</Label>
+                <Input required type="text" id="batchname" defaultValue="" />
             </div>
             <div className="grid gap-2">
-                <Label htmlFor="duration">Duration</Label>
-                <Input required id="duration" defaultValue="" />
-            </div>
-            <div className="grid gap-2">
-                <Label htmlFor="description">Description</Label>
-                <Input required id="description" defaultValue="" />
-            </div>
-            <div className="grid gap-2">
-                <Label htmlFor="duration">Duration</Label>
+                <Label htmlFor="Status">Status</Label>
                 <Select required>
                     <SelectTrigger>
-                        <SelectValue placeholder="Active Not-Active" />
+                        <SelectValue placeholder="Pending, Completed, Ongoing, Merged" />
                     </SelectTrigger>
                     <SelectContent>
-                        <SelectItem value="active">Active</SelectItem>
-                        <SelectItem value="not-active">Not Active</SelectItem>
+                        <SelectItem value="pending">Pending</SelectItem>
+                        <SelectItem value="completed">Completed</SelectItem>
+                        <SelectItem value="ongoing">Ongoing</SelectItem>
+                        <SelectItem value="merged">Merged</SelectItem>
                     </SelectContent>
                 </Select>
             </div>
-            <Button type="submit">Add Course</Button>
+            <div className="grid gap-2">
+                <Label htmlFor="Trainer">Trainer</Label>
+                <Select required>
+                    <SelectTrigger>
+                        <SelectValue placeholder="Select Trainer" />
+                    </SelectTrigger>
+                    <SelectContent>
+                        <SelectItem value="johnDoe">John Doe</SelectItem>
+                        <SelectItem value="janeSmith">Jane Smith</SelectItem>
+                        <SelectItem value="aliceJohnson">Alice Johnson</SelectItem>
+                    </SelectContent>
+                </Select>
+            </div>
+            <div className="grid gap-2">
+                <Label htmlFor="noofstudents">No Of Students</Label>
+                <Input required type="number" id="noofstudents" defaultValue="" />
+            </div>
+            <div className="grid gap-2">
+                <Label htmlFor="course">Course</Label>
+                <Select required>
+                    <SelectTrigger>
+                        <SelectValue placeholder="Select Course" />
+                    </SelectTrigger>
+                    <SelectContent>
+                        <SelectItem value="WebandAppDevelopment">Web and App Development</SelectItem>
+                        <SelectItem value="AppDevelopment">App Development</SelectItem>
+                        <SelectItem value="PythonDevelopment">Python Development</SelectItem>
+                    </SelectContent>
+                </Select>
+            </div>
+            <Button type="submit">Add Batch</Button>
         </form>
     )
 }
