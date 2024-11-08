@@ -33,6 +33,6 @@ export async function POST(request) {
 
 
 
-export async function GET() {
-    return Response.json("User GET Request ")
-}
+    export async function GET() {
+        return Response.json("User GET Request ")
+    }

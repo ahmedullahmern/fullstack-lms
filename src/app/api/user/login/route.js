@@ -44,3 +44,7 @@ export async function POST(request) {
     return Response.json('Working On Login')
 
 }
+
+export async function GET() {
+    return Response.json("User GET Login Request ")
+}
