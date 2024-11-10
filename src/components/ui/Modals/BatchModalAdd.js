@@ -48,7 +48,7 @@ export function BatchAddDailods() {
                 </DialogTrigger>
                 <DialogContent className="sm:max-w-[425px]">
                     <DialogHeader>
-                        <DialogTitle>Add Batch</DialogTitle>
+                        <DialogTitle>Add-Batch</DialogTitle>
                         {/* <DialogDescription>
                             Make changes to your profile here. Click save when you're done.
                         </DialogDescription> */}
