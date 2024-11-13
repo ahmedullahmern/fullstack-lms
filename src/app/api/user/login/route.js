@@ -46,5 +46,6 @@ export async function POST(request) {
 }
 
 export async function GET() {
+    connectDB()
     return Response.json("User GET Login Request ")
 }

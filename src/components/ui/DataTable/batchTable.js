@@ -98,7 +98,7 @@ export const columns = [
                     variant="batchName"
                     onClick={() => column.toggleSorting(column.getIsSorted() === "batchName")}
                 >
-                    <div className="text-right">BatchName</div>
+                    <div className="text-right">Batch-Name</div>
                     <ArrowUpDown className="ml-2 h-4 w-4" />
                 </Button>
             )
