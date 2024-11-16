@@ -34,7 +34,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         authorize: async (credentials) => {
             let user = null
             console.log("credentials==>", credentials)
-            let res = await fetch('http://localhost:3000/api/user/login', {
+            let res = await fetch('https://eloquent-souffle-26d042.netlify.app/api/user/login', {
                 method: "POST",
                 body: JSON.stringify({
                     email: credentials.email,
