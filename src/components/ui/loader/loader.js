@@ -1,5 +1,5 @@
 export default function Loader() {
-    <div className="flex justify-center items-center w-full">
+    <div className="flex justify-center items-center">
         <div role="status">
             <svg
                 aria-hidden="true"
