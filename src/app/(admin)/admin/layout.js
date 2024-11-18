@@ -1,4 +1,4 @@
-import Loader from "@/components/ui/loader/loader"
+// import Loader from "@/components/ui/loader/loader"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import Link from "next/link"
 
