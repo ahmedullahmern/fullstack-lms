@@ -1,28 +1,28 @@
-// import { connectDB } from "@/lib/dbConnect";
-// import { CourseModal } from "@/lib/modals/CourseModal";
+import { connectDB } from "@/lib/dbConnect";
+import { CourseModal } from "@/lib/modals/CourseModal";
 
 
-// export async function POST(request) {
-//     connectDB();
-//     const obj = await request.json();
-//     let newCourse = new CourseModal({ ...obj })
-//     newCourse = await newCourse.save();
+export async function POST(request) {
+    connectDB();
+    const obj = await request.json();
+    let newCourse = new CourseModal({ ...obj })
+    newCourse = await newCourse.save();
 
-//     return Response.json({
-//         error: false,
-//         msg: "Course addde Successfully",
-//         course: newCourse,
-//     });
-// }
+    return Response.json({
+        error: false,
+        msg: "Course addde Successfully",
+        course: newCourse,
+    });
+}
 
 
-// export async function GET() {
-//     connectDB();
+export async function GET() {
+    connectDB();
 
-//     const courses = await CourseModal.find();
-//     return Response.json({
-//         error: false,
-//         msg: "Course Fetched Sucessfully",
-//         courses: courses
-//     })
-// }
+    const courses = await CourseModal.find({title : "AI AND DATA SCIENCE"});
+    return Response.json({
+        error: false,
+        msg: "Course Fetched Sucessfully",
+        courses: courses
+    })
+}
