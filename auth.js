@@ -33,7 +33,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         },
         authorize: async (credentials) => {
             let user = null
-            console.log("credentials==>", credentials)
+            console.log("credentialsAHMEDULlAH==>", credentials)
             let res = await fetch('http://localhost:3000/api/user/login', {
                 method: "POST",
                 body: JSON.stringify({
@@ -64,7 +64,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
             token._id = user._id
             token.role = user.role
             token.picture = user?.profileImg,
-            token.fullname = user?.fullname
+                token.fullname = user?.fullname
             return token
         },
         session({ session, token }) {
