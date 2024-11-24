@@ -5,10 +5,10 @@ const { Schema } = mongoose
 const courseSchema = new Schema(
     {
         title: { type: String, unique: true },
-        IN: String,
+        description: String,
         duration: String,
         eligibility: [String],
-        thumbnail : String
+        thumbnail: String
     },
     { timestamps: true }
 )

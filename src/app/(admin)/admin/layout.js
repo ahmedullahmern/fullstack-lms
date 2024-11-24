@@ -6,7 +6,7 @@ import { redirect } from "next/navigation";
 
 export default async function AdminLayout({ children }) {
     const session = await auth();
-    if (session?.user?.role != "admin") redirect("/");
+    if (session?.user?.role != "admin") redirect    ("/");
     return (
         <Tabs defaultValue="dashboards" className="w-full">
             <TabsList className="w-full gap-5">
