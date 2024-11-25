@@ -35,6 +35,7 @@ import {
 } from "@/components/ui/drawer"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import { addCourse } from "@/actions/courses"
 
 export function CourseAddDailods() {
     const [open, setOpen] = useState(false)
@@ -84,31 +85,28 @@ export function CourseAddDailods() {
 
 function ProfileForm({ className }) {
     return (
-        <form className={cn("grid items-start gap-4", className)}>
+        <form action={addCourse} className={cn("grid items-start gap-4", className)}>
             <div className="grid gap-2">
-                <Label htmlFor="course">Course</Label>
-                <Input required type="text" id="course" defaultValue="" />
+                <Label htmlFor="course">Course Title</Label>
+                <Input required type="text" id="course" name={'title'} />
             </div>
             <div className="grid gap-2">
                 <Label htmlFor="duration">Duration</Label>
-                <Input required id="duration" defaultValue="" />
+                <Input required id="duration" name={'duration'} />
             </div>
             <div className="grid gap-2">
                 <Label htmlFor="description">Description</Label>
-                <Input required id="description" defaultValue="" />
+                <Input required id="description" name={'description'} />
             </div>
             <div className="grid gap-2">
-                <Label htmlFor="duration">Duration</Label>
-                <Select required>
-                    <SelectTrigger>
-                        <SelectValue placeholder="Active Not-Active" />
-                    </SelectTrigger>
-                    <SelectContent>
-                        <SelectItem value="active">Active</SelectItem>
-                        <SelectItem value="not-active">Not Active</SelectItem>
-                    </SelectContent>
-                </Select>
+                <Label htmlFor="eligibility">Eligibilaty</Label>
+                <Input required id="eligibility" name={'eligibility'} />
             </div>
+            <div className="grid gap-2">
+                <Label htmlFor="thumbnail">Thumbnail</Label>
+                <Input type={'url'} required id="thumbnail" name={'thumbnail'} />
+            </div>
+
             <Button type="submit">Add Course</Button>
         </form>
     )
