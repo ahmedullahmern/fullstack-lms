@@ -25,6 +25,6 @@ export async function addCourse(FormData) {
         body: JSON.stringify(obj)
     })
     if(course.ok){
-        revalidatePath('/admin/course')
+        // revalidatePath('/admin/course')
     }
 }
