@@ -8,6 +8,7 @@ export async function POST(request) {
     const obj = await request.json();
     console.log("Login obj==>", obj)
     const user = await userModal.findOne({ email: obj.email })
+    console.log("userPassword==>",user.password)
     if (!user)
         return Response.json({
             error: true,
