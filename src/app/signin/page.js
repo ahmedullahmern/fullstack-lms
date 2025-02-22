@@ -3,11 +3,14 @@ import { signIn, auth } from "../../../auth"
 import { FcGoogle } from 'react-icons/fc';  // Import Google Icon from react-icons
 
 export default async function SignIn() {
-    
+
     const session = await auth()
     console.log("session==>", session)
-    if (session) {
+    if (session?.user?.role === "user") {
         redirect("/")
+    }
+    if (session?.user?.role === "admin") {
+        redirect("/admin/dashboards")
     }
     return (
         <div className="flex justify-center items-center min-h-screen bg-gray-100">
