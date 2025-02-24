@@ -19,7 +19,7 @@ export async function POST(request) {
 export async function GET() {
     connectDB();
 
-    const courses = await CourseModal.find({ duration: "6 Year" });
+    const courses = await CourseModal.find();
     return Response.json({
         error: false,
         msg: "Course Fetched Sucessfully",

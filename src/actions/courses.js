@@ -5,7 +5,7 @@ import { revalidatePath } from "next/cache";
 export async function getCourse() {
     let courses = await fetch(`${process.env.BASE_URL}api/course`)
     courses = await courses.json()
-    return courses;
+    return courses
 }
 
 
@@ -24,7 +24,7 @@ export async function addCourse(FormData) {
         method: "POST",
         body: JSON.stringify(obj)
     })
-    if(course.ok){
-        // revalidatePath('/admin/course')
+    if (course.ok) {
+        revalidatePath('admin/courses')
     }
 }

@@ -38,33 +38,33 @@ import {
     TableRow,
 } from "@/components/ui/table"
 
-const data = [
-    {
-        id: "1",
-        batchName: "Batch A",
-        status: "ongoing",
-        trainer: "John Doe",
-        noOfStudents: 25,
-        course: "Web and App Development",
-    },
-    {
-        id: "2",
-        batchName: "Batch B",
-        status: "pending",
-        trainer: "Jane Smith",
-        noOfStudents: 20,
-        course: "App Development",
-    },
-    {
-        id: "3",
-        batchName: "Batch C",
-        status: "completed",
-        trainer: "Alice Johnson",
-        noOfStudents: 30,
-        course: "Python Development",
-    },
+// const data = [
+//     {
+//         id: "1",
+//         batchName: "Batch A",
+//         status: "ongoing",
+//         trainer: "John Doe",
+//         noOfStudents: 25,
+//         course: "Web and App Development",
+//     },
+//     {
+//         id: "2",
+//         batchName: "Batch B",
+//         status: "pending",
+//         trainer: "Jane Smith",
+//         noOfStudents: 20,
+//         course: "App Development",
+//     },
+//     {
+//         id: "3",
+//         batchName: "Batch C",
+//         status: "completed",
+//         trainer: "Alice Johnson",
+//         noOfStudents: 30,
+//         course: "Python Development",
+//     },
 
-]
+// ]
 
 
 export const columns = [
@@ -91,19 +91,26 @@ export const columns = [
         enableHiding: false,
     },
     {
-        accessorKey: "batchName",
+        accessorKey: "title",
         header: ({ column }) => {
             return (
                 <Button
-                    variant="batchName"
-                    onClick={() => column.toggleSorting(column.getIsSorted() === "batchName")}
+                    variant="title"
+                    onClick={() => column.toggleSorting(column.getIsSorted() === "title")}
                 >
                     <div className="text-right">Batch-Name</div>
                     <ArrowUpDown className="ml-2 h-4 w-4" />
                 </Button>
             )
         },
-        cell: ({ row }) => <div>{row.getValue("batchName")}</div>,
+        cell: ({ row }) => <div>{row.getValue("title")}</div>,
+    },
+    {
+        accessorKey: "course",
+        header: () => <div className="text-right">Course</div>,
+        cell: ({ row }) => (
+            <div className="capitalize ">{row.getValue("course")?.title}</div>
+        ),
     },
     {
         accessorKey: "status",
@@ -111,37 +118,6 @@ export const columns = [
         cell: ({ row }) => (
             <div className="capitalize ">{row.getValue("status")}</div>
         ),
-    },
-    {
-        accessorKey: "trainer",
-        header: "trainer",
-        cell: ({ row }) => (
-            <div className="capitalize ">{row.getValue("trainer")}</div>
-        ),
-    },
-
-    {
-        accessorKey: "noOfStudents",
-        header: ({ column }) => {
-            return (
-                <Button
-                    variant="noOfStudents"
-                    onClick={() => column.toggleSorting(column.getIsSorted() === "noOfStudents")}
-                >
-                    <div className="text-right">No. Of Students</div>
-                    <ArrowUpDown className="ml-2 h-4 w-4" />
-                </Button>
-            )
-        },
-        cell: ({ row }) => <div>{row.getValue("noOfStudents")}</div>,
-    },
-    {
-        accessorKey: "course",
-        header: () => <div className="text-right">Course</div>,
-        cell: ({ row }) => {
-            const amount = row.getValue("course")
-            return <div className="text-right font-medium">{amount}</div>
-        },
     },
     {
         id: "actions",
@@ -174,7 +150,7 @@ export const columns = [
     },
 ]
 
-export function BatchTableData() {
+export function BatchTableData({ batches }) {
     const [sorting, setSorting] = useState([])
     const [columnFilters, setColumnFilters] = useState([])
     const [columnVisibility, setColumnVisibility] =
@@ -182,7 +158,7 @@ export function BatchTableData() {
     const [rowSelection, setRowSelection] = useState({})
 
     const table = useReactTable({
-        data,
+        data: batches.batches,
         columns,
         onSortingChange: setSorting,
         onColumnFiltersChange: setColumnFilters,
@@ -213,9 +189,9 @@ export function BatchTableData() {
                 />
                 <Input
                     placeholder="Filter batchName..."
-                    value={(table.getColumn("batchName")?.getFilterValue()) ?? ""}
+                    value={(table.getColumn("title")?.getFilterValue()) ?? ""}
                     onChange={(event) =>
-                        table.getColumn("batchName")?.setFilterValue(event.target.value)
+                        table.getColumn("title")?.setFilterValue(event.target.value)
                     }
                     className="max-w-sm"
                 />

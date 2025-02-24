@@ -35,11 +35,12 @@ import {
 } from "@/components/ui/drawer"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import { addBatch } from "@/actions/batches"
 
-export function BatchAddDailods() {
+export function BatchAddDailods({ courses }) {
     const [open, setOpen] = useState(false)
     const isDesktop = true
-
+    console.log("course me kiya he  bhai  =>", courses)
     if (isDesktop) {
         return (
             <Dialog open={open} onOpenChange={setOpen}>
@@ -53,7 +54,7 @@ export function BatchAddDailods() {
                             Make changes to your profile here. Click save when you're done.
                         </DialogDescription> */}
                     </DialogHeader>
-                    <ProfileForm />
+                    <ProfileForm courses={courses} />
                 </DialogContent>
             </Dialog>
         )
@@ -82,14 +83,33 @@ export function BatchAddDailods() {
     )
 }
 
-function ProfileForm({ className }) {
+function ProfileForm({ className, courses }) {
     return (
-        <form className={cn("grid items-start gap-4", className)}>
+        <form action={addBatch} className={cn("grid items-start gap-4", className)}>
             <div className="grid gap-2">
-                <Label htmlFor="batchname">Course Name</Label>
-                <Input required type="text" id="batchname" defaultValue="" />
+                <Label htmlFor="batchname">Batch Name</Label>
+                <Input required type="text" id="batchname" name={"title"} defaultValue="" />
             </div>
             <div className="grid gap-2">
+                <Label htmlFor="description">Description</Label>
+                <Input required type="text" id="description" name={"description"} defaultValue="" />
+            </div>
+            <div className="grid gap-2">
+                <Label htmlFor="course">Course</Label>
+                <Select required name="course">
+                    <SelectTrigger>
+                        <SelectValue placeholder="Select Course" />
+                    </SelectTrigger>
+                    <SelectContent>
+                       {courses.map((course)=>{
+                        <SelectItem key={course._id} value={course._id}>
+                            {course.title}
+                        </SelectItem>
+                       })}
+                    </SelectContent>
+                </Select>
+            </div>
+            {/* <div className="grid gap-2">
                 <Label htmlFor="Status">Status</Label>
                 <Select required>
                     <SelectTrigger>
@@ -102,8 +122,8 @@ function ProfileForm({ className }) {
                         <SelectItem value="merged">Merged</SelectItem>
                     </SelectContent>
                 </Select>
-            </div>
-            <div className="grid gap-2">
+            </div> */}
+            {/* <div className="grid gap-2">
                 <Label htmlFor="Trainer">Trainer</Label>
                 <Select required>
                     <SelectTrigger>
@@ -119,20 +139,7 @@ function ProfileForm({ className }) {
             <div className="grid gap-2">
                 <Label htmlFor="noofstudents">No Of Students</Label>
                 <Input required type="number" id="noofstudents" defaultValue="" />
-            </div>
-            <div className="grid gap-2">
-                <Label htmlFor="course">Course</Label>
-                <Select required>
-                    <SelectTrigger>
-                        <SelectValue placeholder="Select Course" />
-                    </SelectTrigger>
-                    <SelectContent>
-                        <SelectItem value="WebandAppDevelopment">Web and App Development</SelectItem>
-                        <SelectItem value="AppDevelopment">App Development</SelectItem>
-                        <SelectItem value="PythonDevelopment">Python Development</SelectItem>
-                    </SelectContent>
-                </Select>
-            </div>
+            </div> */}
             <Button type="submit">Add Batch</Button>
         </form>
     )

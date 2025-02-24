@@ -65,7 +65,7 @@ export const columns = [
     {
         accessorKey: "thumbnail",
         header: "Thumbnail",
-        cell: ({ row }) => (<Image src={row.getValue("thumbnail")} alt={"Koi Error Hoga"} width={70} height={100}/>),
+        cell: ({ row }) => (<Image src={row.getValue("thumbnail")} alt={"Koi Error Hoga"} width={70} height={100} />),
     },
     {
         accessorKey: "title",
