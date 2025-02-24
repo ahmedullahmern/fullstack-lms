@@ -101,11 +101,11 @@ function ProfileForm({ className, courses }) {
                         <SelectValue placeholder="Select Course" />
                     </SelectTrigger>
                     <SelectContent>
-                       {courses.map((course)=>{
-                        <SelectItem key={course._id} value={course._id}>
-                            {course.title}
-                        </SelectItem>
-                       })}
+                        {courses.map((course) => (
+                            <SelectItem key={course._id} value={course._id}>
+                                {course.title}
+                            </SelectItem>
+                        ))}
                     </SelectContent>
                 </Select>
             </div>

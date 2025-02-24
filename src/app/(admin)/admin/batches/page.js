@@ -5,7 +5,7 @@ import { BatchAddDailods } from "@/components/ui/Modals/BatchModalAdd";
 
 export default async function Batches() {
     const batches = await getBatches()
-    const courses = await getCourse();
+    const {courses} = await getCourse();
     console.log("batches in admin page ==>", batches)
     return (
         <div className="text-center p-10">

@@ -3,14 +3,10 @@
 import { revalidatePath } from "next/cache";
 
 export async function getBatches() {
-    try {
-        const response = await fetch(`${process.env.BASE_URL}api/batch`);
-        const data = await response.json();
-        console.log("API Response:", data);
-    } catch (error) {
-        console.error("Error parsing JSON:", error);
-    }
-
+    let batches = await fetch(`${process.env.BASE_URL}api/batch`)
+    batches = await batches.json()
+    console.log("wr eer==>", batches)
+    return batches
 }
 
 
