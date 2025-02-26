@@ -98,7 +98,7 @@ export const columns = [
                     variant="title"
                     onClick={() => column.toggleSorting(column.getIsSorted() === "title")}
                 >
-                    <div className="text-center">Batch-Name</div>
+                    <div className="text-right">Batch-Name</div>
                     <ArrowUpDown className="ml-2 h-4 w-4" />
                 </Button>
             )
@@ -107,9 +107,9 @@ export const columns = [
     },
     {
         accessorKey: "course",
-        header: () => <div className="text-center">Course</div>,
+        header: () => <div className="capitalize text-center">Course</div>,
         cell: ({ row }) => (
-            <div className="capitalize ">{row.getValue("course")?.title}</div>
+            <div>{row.getValue("course")?.title}</div>
         ),
     },
     {
