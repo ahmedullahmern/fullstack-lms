@@ -11,7 +11,7 @@ const admissionSchema = new Schema(
         status: {
             type: String,
             default: "pending",
-            enum: ["pending", "open", ""],
+            enum: ["pending", "open", "close"],
         },
     },
     { timestamps: true }

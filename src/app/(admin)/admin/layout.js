@@ -6,7 +6,7 @@ import { redirect } from "next/navigation";
 
 export default async function AdminLayout({ children }) {
     const session = await auth();
-    if (session?.user?.role != "admin") redirect    ("/");
+    if (session?.user?.role != "admin") redirect("/");
     return (
         <Tabs defaultValue="dashboards" className="w-full">
             <TabsList className="w-full gap-5">
@@ -19,6 +19,9 @@ export default async function AdminLayout({ children }) {
                 <Link href={"/admin/batches"}>
                     <TabsTrigger value="batches">Batches</TabsTrigger>
                 </Link>
+                <Link href={"/admin/admissions"}>
+                    <TabsTrigger value="admissions">Admissions</TabsTrigger>
+                </Link>
                 <Link href={"/admin/trainers"}>
                     <TabsTrigger value="trainers">Trainers</TabsTrigger>
                 </Link>
@@ -28,6 +31,7 @@ export default async function AdminLayout({ children }) {
             </TabsList>
             <TabsContent value="dashboards">{children}</TabsContent>
             <TabsContent value="batches">{children}</TabsContent>
+            <TabsContent value="admissions">{children}</TabsContent>
             <TabsContent value="courses">{children}</TabsContent>
             <TabsContent value="trainers">{children}</TabsContent>
             <TabsContent value="students">{children}</TabsContent>

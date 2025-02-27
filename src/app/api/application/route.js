@@ -39,7 +39,7 @@ export async function GET(req) {
     const application = await ApplicationModal.find(query)
         .populate("course", "title")
         .populate("batch", "title")
-        .populate("admission")
+        .populate("admission" , "startDate endDate status")
         .populate("user", "fullname email profileImg")
     console.log("application Api Wala=>", application);
     return Response.json({
