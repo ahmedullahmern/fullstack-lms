@@ -2,10 +2,10 @@
 
 import { revalidatePath } from "next/cache";
 
-export async function getAdmissions() {
-    let admissions = await fetch(`${process.env.BASE_URL}api/admission`)
+export async function getAdmissions(status = null) {
+    let admissions = await fetch(`${process.env.BASE_URL}api/admission?status=${status}`)
     admissions = await admissions.json()
-    console.log("wr eer==>", admissions)
+    console.log("addmision in action==>", admissions)
     return admissions
 }
 

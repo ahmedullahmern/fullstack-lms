@@ -42,7 +42,7 @@ export function AdmissionAddDailods({ courses, batches }) {
     const isDesktop = true
     console.log("Batches Data:", batches);
     console.log("Batches Array:", batches?.batches);
-    
+
     if (isDesktop) {
         return (
             <Dialog open={open} onOpenChange={setOpen}>
@@ -86,11 +86,12 @@ export function AdmissionAddDailods({ courses, batches }) {
 }
 
 function ProfileForm({ className, courses, batches }) {
+    const [chosenCourse, setChosenCourse] = React.useState("");
     return (
         <form action={addAdmission} className={cn("grid items-start gap-4", className)}>
             <div className="grid gap-2">
                 <Label htmlFor="course">Course</Label>
-                <Select required name="course">
+                <Select required name="course" onValueChange={(value) => setChosenCourse(value)}>
                     <SelectTrigger>
                         <SelectValue placeholder="Select Course" />
                     </SelectTrigger>
@@ -103,21 +104,25 @@ function ProfileForm({ className, courses, batches }) {
                     </SelectContent>
                 </Select>
             </div>
-            <div className="grid gap-2">
-                <Label htmlFor="course">Batches</Label>
-                <Select required name="batches">
-                    <SelectTrigger>
-                        <SelectValue placeholder="Select batches" />
-                    </SelectTrigger>
-                    <SelectContent>
-                        {batches.map((batch) => (
-                            <SelectItem key={batch._id} value={batch._id}>
-                                {batch.title}
-                            </SelectItem>
-                        ))}
-                    </SelectContent>
-                </Select>
-            </div>
+            {chosenCourse && (
+                <div className="grid gap-2">
+                    <Label htmlFor="course">Batches</Label>
+                    <Select required name="batch">
+                        <SelectTrigger>
+                            <SelectValue placeholder="Select batches" />
+                        </SelectTrigger>
+                        <SelectContent>
+                            {batches
+                                .filter((data) => data.course._id == chosenCourse)
+                                .map((batch) => (
+                                    <SelectItem key={batch._id} value={batch._id}>
+                                        {batch.title}
+                                    </SelectItem>
+                                ))}
+                        </SelectContent>
+                    </Select>
+                </div>
+            )}
             <div className="grid gap-2">
                 <Label htmlFor="startDate">Start Date</Label>
                 <Input required type="date" id="startDate" name={"startDate"} defaultValue="" />

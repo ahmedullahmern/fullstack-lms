@@ -45,9 +45,13 @@
         if (searchParams.get("batch")) {
             query.batch = searchParams.get("batch");
         }
+        
+        if (searchParams.get("status")) {
+            query.status = searchParams.get("status");
+        }
         console.log("query=>", query);
         const admission = await AdmissionModal.find(query)
-            .populate("course", "title")
+            .populate("course", "title description")
             .populate("batch", "title");
         console.log("admission Api Wala=>", admission);
         return Response.json({
