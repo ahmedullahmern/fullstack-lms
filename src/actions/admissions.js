@@ -10,6 +10,14 @@ export async function getAdmissions(status = null) {
 }
 
 
+export async function getAdmissionsAdmin() {
+    let admissions = await fetch(`${process.env.BASE_URL}api/admission`)
+    admissions = await admissions.json()
+    console.log("addmision in action==>", admissions)
+    return admissions
+}
+
+
 
 export async function addAdmission(FormData) {
     const obj = {
@@ -25,9 +33,12 @@ export async function addAdmission(FormData) {
         method: "POST",
         body: JSON.stringify(obj)
     })
+    const result = await admission.json(); 
+    console.log("Server Response in addAdmission==>", result);
     if (admission.ok) {
         revalidatePath('admin/admissions')
     }
+    return result;
 }
 
 export async function updateAdmission(id, status) {
