@@ -56,6 +56,7 @@ export async function GET(req) {
         .populate("batch", "title");
     console.log("admission Api Wala=>", admission);
     return Response.json({
+        success: true,
         error: false,
         msg: "Admission Fetched Successfully",
         admission,

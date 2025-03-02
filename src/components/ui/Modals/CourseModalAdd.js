@@ -54,7 +54,7 @@ export function CourseAddDailods() {
                             Make changes to your profile here. Click save when you're done.
                         </DialogDescription> */}
                     </DialogHeader>
-                    <ProfileForm />
+                    <ProfileForm setOpen={setOpen} />
                 </DialogContent>
             </Dialog>
         )
@@ -83,9 +83,32 @@ export function CourseAddDailods() {
     )
 }
 
-function ProfileForm({ className }) {
+function ProfileForm({ className, setOpen }) {
+    const [error, setError] = useState(null);
+    const [isLoading, setIsLoading] = useState(false)
+
+    async function handleSubmit(formData) {
+        setIsLoading(true)
+        setError(null);
+
+        addCourse(formData)
+            .then((response) => {
+                setIsLoading(false)
+                console.log("Response in Dailog==>", response);
+                if (response.success) {
+                    setOpen(false);
+                } else {
+                    setIsLoading(false)
+                    setError("Failed to add admission");
+                }
+            })
+            .catch((error) => {
+                setIsLoading(false)
+                console.error("Error submitting admission:", error);
+            });
+    }
     return (
-        <form action={addCourse} className={cn("grid items-start gap-4", className)}>
+        <form action={handleSubmit} className={cn("grid items-start gap-4", className)}>
             <div className="grid gap-2">
                 <Label htmlFor="course">Course Title</Label>
                 <Input required type="text" id="course" name={'title'} />

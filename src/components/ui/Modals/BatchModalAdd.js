@@ -54,7 +54,7 @@ export function BatchAddDailods({ courses }) {
                             Make changes to your profile here. Click save when you're done.
                         </DialogDescription> */}
                     </DialogHeader>
-                    <ProfileForm courses={courses} />
+                    <ProfileForm courses={courses} setOpen={setOpen} />
                 </DialogContent>
             </Dialog>
         )
@@ -83,9 +83,32 @@ export function BatchAddDailods({ courses }) {
     )
 }
 
-function ProfileForm({ className, courses }) {
+function ProfileForm({ className, courses, setOpen }) {
+    const [error, setError] = useState(null);
+    const [isLoading, setIsLoading] = useState(false)
+
+    async function handleSubmit(formData) {
+        setIsLoading(true)
+        setError(null);
+
+        addBatch(formData)
+            .then((response) => {
+                setIsLoading(false)
+                console.log("Response in Dailog==>", response);
+                if (response.success) {
+                    setOpen(false);
+                } else {
+                    setIsLoading(false)
+                    setError("Failed to add admission");
+                }
+            })
+            .catch((error) => {
+                setIsLoading(false)
+                console.error("Error submitting admission:", error);
+            });
+    }
     return (
-        <form action={addBatch} className={cn("grid items-start gap-4", className)}>
+        <form action={handleSubmit} className={cn("grid items-start gap-4", className)}>
             <div className="grid gap-2">
                 <Label htmlFor="batchname">Batch Name</Label>
                 <Input required type="text" id="batchname" name={"title"} defaultValue="" />
@@ -140,7 +163,11 @@ function ProfileForm({ className, courses }) {
                 <Label htmlFor="noofstudents">No Of Students</Label>
                 <Input required type="number" id="noofstudents" defaultValue="" />
             </div> */}
-            <Button type="submit">Add Batch</Button>
-        </form>
+            {error && <p className="text-red-500">{error}</p>}
+            <Button type="submit" disabled={isLoading}>
+                {isLoading ?
+                    "loadin" : "Add Admission"}
+            </Button>
+        </form >
     )
 }

@@ -24,7 +24,10 @@ export async function addBatch(FormData) {
         method: "POST",
         body: JSON.stringify(obj)
     })
+    const result = await batch.json();
+    console.log("Server Response in addcourse==>", result);
     if (batch.ok) {
         revalidatePath('admin/batches')
     }
+    return result
 }

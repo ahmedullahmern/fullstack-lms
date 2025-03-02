@@ -9,6 +9,7 @@ export async function POST(request) {
     newCourse = await newCourse.save();
 
     return Response.json({
+        success: true,
         error: false,
         msg: "Course addde Successfully",
         course: newCourse,
@@ -21,6 +22,7 @@ export async function GET() {
 
     const courses = await CourseModal.find();
     return Response.json({
+        success: true,
         error: false,
         msg: "Course Fetched Sucessfully",
         courses: courses

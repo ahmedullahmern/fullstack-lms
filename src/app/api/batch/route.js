@@ -9,6 +9,7 @@ export async function POST(request) {
     newBatch = await newBatch.save();
     console.log("newBatch=>", newBatch);
     return Response.json({
+        success: true,
         error: false,
         msg: "Batch Add SuccessFully",
         batch: newBatch
@@ -28,6 +29,7 @@ export async function GET(req) {
     const batches = await BatchModal.find(query).populate("course");
     console.log("batches Api Wala=>", batches);
     return Response.json({
+        success: true,
         error: false,
         msg: "Batched Fetched Successfully",
         batches,

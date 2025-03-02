@@ -24,7 +24,10 @@ export async function addCourse(FormData) {
         method: "POST",
         body: JSON.stringify(obj)
     })
+    const result = await course.json();
+    console.log("Server Response in addcourse==>", result);
     if (course.ok) {
         revalidatePath('admin/courses')
     }
+    return result;
 }
