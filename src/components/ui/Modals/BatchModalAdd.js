@@ -36,6 +36,7 @@ import {
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { addBatch } from "@/actions/batches"
+import ButtonLoader from "../ButtonLoader/ButtonLoader"
 
 export function BatchAddDailods({ courses }) {
     const [open, setOpen] = useState(false)
@@ -93,7 +94,7 @@ function ProfileForm({ className, courses, setOpen }) {
 
         addBatch(formData)
             .then((response) => {
-                setIsLoading(false)
+                setIsLoading(true)
                 console.log("Response in Dailog==>", response);
                 if (response.success) {
                     setOpen(false);
@@ -166,7 +167,7 @@ function ProfileForm({ className, courses, setOpen }) {
             {error && <p className="text-red-500">{error}</p>}
             <Button type="submit" disabled={isLoading}>
                 {isLoading ?
-                    "loadin" : "Add Admission"}
+                    <ButtonLoader /> : "Add Admission"}
             </Button>
         </form >
     )

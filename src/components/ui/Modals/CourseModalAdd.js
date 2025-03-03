@@ -36,6 +36,7 @@ import {
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { addCourse } from "@/actions/courses"
+import ButtonLoader from "../ButtonLoader/ButtonLoader"
 
 export function CourseAddDailods() {
     const [open, setOpen] = useState(false)
@@ -88,12 +89,12 @@ function ProfileForm({ className, setOpen }) {
     const [isLoading, setIsLoading] = useState(false)
 
     async function handleSubmit(formData) {
-        setIsLoading(true)
+        // setIsLoading(true)
         setError(null);
 
         addCourse(formData)
             .then((response) => {
-                setIsLoading(false)
+                setIsLoading(true)
                 console.log("Response in Dailog==>", response);
                 if (response.success) {
                     setOpen(false);
@@ -130,7 +131,11 @@ function ProfileForm({ className, setOpen }) {
                 <Input type={'url'} required id="thumbnail" name={'thumbnail'} />
             </div>
 
-            <Button type="submit">Add Course</Button>
+            {error && <p className="text-red-500">{error}</p>}
+            <Button type="submit" disabled={isLoading}>
+                {isLoading ?
+                    <ButtonLoader /> : "Add Admission"}
+            </Button>
         </form>
     )
 }
