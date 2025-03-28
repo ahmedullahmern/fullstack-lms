@@ -7,14 +7,15 @@ export default async function Header() {
     console.log("session in the Header==>", session)
     return (
         <div className="bg-amber-300 h-[50px] flex items-center container">
-            <div className="container mx-auto flex justify-between">
+            <div className="container mx-auto px-20 flex justify-between">
                 <h1 className="font-semibold ">
                     LMS-APP
                 </h1>
                 {
                     session ? (
                         <div className="flex justify-between">
-                            <h1>{session.user.email}</h1>
+                            <h1 className="mr-10">{session.user.email}</h1>
+                            <Link href={"/mycourse"}>My courses</Link>
                             <form
                                 action={async () => {
                                     "use server"

@@ -33,7 +33,7 @@ export async function addAdmission(FormData) {
         method: "POST",
         body: JSON.stringify(obj)
     })
-    const result = await admission.json(); 
+    const result = await admission.json();
     console.log("Server Response in addAdmission==>", result);
     if (admission.ok) {
         revalidatePath('admin/admissions')
