@@ -5,16 +5,26 @@ import { auth, signOut } from "../../../../auth"
 export default async function Header() {
     const session = await auth()
     console.log("session in the Header==>", session)
+    const check = session?.user?.role === "admin"
     return (
         <div className="bg-amber-300 h-[50px] flex items-center container">
             <div className="container mx-auto px-20 flex justify-between">
-                <h1 className="font-semibold ">
-                    LMS-APP
-                </h1>
+                <Link href={"/"}>
+                    <h1 className="font-semibold ">
+                        LMS-APP
+                    </h1>
+                </Link>
                 {
                     session ? (
                         <div className="flex justify-between">
-                            <h1 className="mr-10">{session.user.email}</h1>
+                            {
+                                check ? <>
+                                    <Link className="mr-5" href={"/admin/dashboards"}>Dashboards</Link>
+                                    <h1 className="mr-5">{"hi "+session.user.name}</h1>
+                                </>
+                                    :
+                                    <h1 className="mr-5">{"hi "+session.user.name}</h1>
+                            }
                             <Link href={"/mycourse"}>My courses</Link>
                             <form
                                 action={async () => {
