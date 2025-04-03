@@ -155,7 +155,7 @@ export const columns = [
             const admission = row.original;
             return (
                 <Link href={`/admin/admissions/${admission._id}`}>
-                    {/* <EyeIcon /> */}
+                    <EyeIcon />
                 </Link>
             )
         },

@@ -39,7 +39,7 @@ export async function GET(req) {
     const application = await ApplicationModal.find(query)
         .populate("course", "title")
         .populate("batch", "title")
-        .populate("admission" , "startDate endDate status")
+        .populate("admission", "startDate endDate status")
         .populate("user", "fullname email profileImg")
     console.log("application Api Wala=>", application);
     return Response.json({
@@ -47,4 +47,20 @@ export async function GET(req) {
         msg: "Application Fetched Successfully",
         application,
     });
+}
+
+export async function PUT(request) {
+    connectDB()
+    const obj = await request.json();
+    const { id, status } = obj
+    const updated = await ApplicationModal.findOneAndUpdate(
+        { _id: id },
+        { status: status }
+    ).exec()
+    console.log("HI UPDATE kiya Masla he bhai==>", updated)
+    return Response.json({
+        error: false,
+        msg: "Application Updated SuccessFully",
+        FullUpdateBhai: updated
+    })
 }

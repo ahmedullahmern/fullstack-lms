@@ -2,6 +2,7 @@
 import React from "react";
 
 export default function ApplicationCard({ application }) {
+    console.log("AoApplication==>",application)
     return (
         <div className="border rounded-xl shadow-md p-4 bg-white">
             {/* User Info */}
@@ -34,7 +35,7 @@ export default function ApplicationCard({ application }) {
             <div className="mt-2 text-sm text-gray-700">
                 <p><strong>Start Date:</strong> {application.admission.startDate}</p>
                 <p><strong>End Date:</strong> {application.admission.endDate}</p>
-                <p><strong>Status:</strong>
+                <p className="py-2"><strong>Status:</strong>
                     <span className={`ml-2 px-2 py-1 rounded ${application.status === "pending" ? "bg-yellow-200 text-yellow-800" : "bg-green-200 text-green-800"}`}>
                         {application.status}
                     </span>

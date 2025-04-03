@@ -9,6 +9,14 @@ export async function getAdmissions(status = null) {
     return admissions
 }
 
+export async function getSingleAdmission(id) {
+    console.log('idWalahenabhai Ta Bhai Jan==>', id)
+    let admission = await fetch(`${process.env.BASE_URL}api/admission/${id}`)
+    admission = await admission.json()
+    console.log("addmision in Detail Action==>", admission)
+    return admission
+}
+
 
 export async function getAdmissionsAdmin() {
     let admissions = await fetch(`${process.env.BASE_URL}api/admission`)

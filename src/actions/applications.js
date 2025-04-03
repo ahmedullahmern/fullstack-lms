@@ -19,14 +19,14 @@ export async function getApplications({ course = "", batch = "", admission = "",
 
 export async function addApplication(obj) {
     console.log("Obj=>", obj);
-  
+
     const batch = await fetch(`${process.env.BASE_URL}api/application`, {
-      method: "POST",
-      body: JSON.stringify(obj),
-      cache: "no-cache",
+        method: "POST",
+        body: JSON.stringify(obj),
+        cache: "no-cache",
     });
     return await batch.json();
-  }
+}
 
 // export async function addApplication(FormData) {
 //     const obj = {
@@ -50,7 +50,7 @@ export async function addApplication(obj) {
 //     return result;
 // }
 
-export async function updateApplication(id, status,admissionId) {
+export async function updateApplication(id, status, admissionId) {
 
     const application = await fetch(`${process.env.BASE_URL}api/application`, {
         method: "PUT",
@@ -60,6 +60,6 @@ export async function updateApplication(id, status,admissionId) {
         })
     })
     if (application.ok) {
-        revalidatePath('admin/admissions/${admissionId}')
+        revalidatePath(`admin/admissions/${admissionId}`)
     }
 }

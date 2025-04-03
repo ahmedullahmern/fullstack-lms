@@ -9,7 +9,7 @@ export default async function MyCourse() {
         redirect("/")
     }
     const { application } = await getApplications({ user: session?.user?._id });
-
+    console.log("ApplicationsAhmed==>", application)
     return (
         <div className="container mx-auto px-20 my-10">
             <h1 className="text-2xl font-bold mb-5">My Courses</h1>
