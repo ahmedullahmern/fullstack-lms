@@ -21,7 +21,7 @@ export default function CourseSection({ admission, session }) {
     }
 
     return (
-        <section className="container mx-auto my-10 px-20">
+        <section className="container mx-auto my-10 px-10">
             <div className="flex justify-between">
                 <h1 className="text-3xl font-bold">Apply to our Latest Courses</h1>
             </div>

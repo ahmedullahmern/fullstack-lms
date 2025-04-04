@@ -6,7 +6,7 @@ import { auth } from "../../auth";
 
 export default async function Home() {
 
-  const { admission } = await getAdmissions("pending")
+  const { admission } = await getAdmissions("open")
   const session = await auth()
 
   return (

@@ -1,50 +1,71 @@
-import Link from "next/link"
-import { auth, signOut } from "../../../../auth"
 
+
+import Link from 'next/link';
+import { auth } from '../../../../auth';
+import { Button } from '@/components/ui/button';
+import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
+import { Menu, LogIn, GraduationCap } from 'lucide-react';
+import { handleSignOut } from '@/actions/authActions';
+import { UserIcon } from "lucide-react";
 
 export default async function Header() {
-    const session = await auth()
-    console.log("session in the Header==>", session)
-    const check = session?.user?.role === "admin"
+    const session = await auth();
+    const isAdmin = session?.user?.role === 'admin';
+
     return (
-        <div className="bg-amber-300 h-[50px] flex items-center container">
-            <div className="container mx-auto px-20 flex justify-between">
-                <Link href={"/"}>
-                    <h1 className="font-semibold ">
-                        LMS-APP
-                    </h1>
+        <header className="bg-slate-200 shadow-md">
+            <div className="container mx-auto px-6 py-3 flex justify-between items-center">
+                {/* Logo */}
+                <Link href="/" className="text-lg font-bold flex items-center gap-2">
+                    <GraduationCap className="w-6 h-6" /> LMS
                 </Link>
-                {
-                    session ? (
-                        <div className="flex justify-between">
-                            {
-                                check ? <>
-                                    <Link className="mr-5" href={"/admin/dashboards"}>Dashboards</Link>
-                                    <h1 className="mr-5">{"hi "+session.user.name}</h1>
-                                </>
-                                    :
-                                    <h1 className="mr-5">{"hi "+session.user.name}</h1>
-                            }
-                            <Link href={"/mycourse"}>My courses</Link>
-                            <form
-                                action={async () => {
-                                    "use server"
-                                    await signOut()
-                                }}
-                            >
-                                <button
-                                    className="border border-black px-5 rounded-full ml-5 hover:opacity-45"
-                                    type="submit">Signout</button>
+
+                {/* Desktop Menu */}
+                <nav className="hidden md:flex space-x-6 items-center">
+                    {session ? (
+                        <>
+                            {isAdmin && <Link className='hover:text-blue-800 hover:underline' href="/admin/dashboards">Dashboards</Link>}
+                            <Link className='hover:text-blue-800 hover:underline' href="/mycourse">My Courses</Link>
+                            <span className="font-semibold">Hi, {session?.user?.name}</span>
+                            <form action={handleSignOut}>
+                                <Button variant="outline" className="ml-4" type="submit"><UserIcon className="h-4 w-4" /> Sign Out</Button>
                             </form>
-                        </div>
+                        </>
                     ) : (
-                        <Link href={"/signin"}
-                            className="border border-black px-5 rounded-full ml-20 hover:opacity-45">
-                            Login
+                        <Link href="/signin" className="flex items-center gap-2">
+                            <Button variant="outline"><UserIcon className="h-4 w-4" /> Login</Button>
                         </Link>
-                    )
-                }
+                    )}
+                </nav>
+
+                {/* Mobile Menu */}
+                <Sheet>
+                    <SheetTrigger className="md:hidden">
+                        <Menu className="w-6 h-6" />
+                    </SheetTrigger>
+                    <SheetContent side="left">
+                        <div className="flex flex-col space-y-4 mt-6">
+                            <Link href="/" className="text-lg font-bold flex items-center gap-2">
+                                <GraduationCap className="w-6 h-6" /> LMS-APP
+                            </Link>
+                            {session ? (
+                                <>
+                                    {isAdmin && <Link href="/admin/dashboards">Dashboards</Link>}
+                                    <Link href="/mycourse">My Courses</Link>
+                                    <span className="font-semibold">Hi, {session?.user?.name}</span>
+                                    <form action={handleSignOut}>
+                                        <Button variant="outline" className="ml-4" type="submit">Sign Out</Button>
+                                    </form>
+                                </>
+                            ) : (
+                                <Link href="/signin" className="flex items-center gap-2">
+                                    <LogIn className="w-5 h-5" /> <Button variant="outline" className="w-full">Login</Button>
+                                </Link>
+                            )}
+                        </div>
+                    </SheetContent>
+                </Sheet>
             </div>
-        </div>
-    )
+        </header>
+    );
 }

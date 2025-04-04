@@ -45,6 +45,7 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select";
+import { updateAdmission } from "@/actions/admissions"
 // const data = [
 //     {
 //         id: "1",
