@@ -113,24 +113,17 @@ export default function AdmissionDetail({ admission }) {
                         </CardContent>
                         <CardFooter className="flex justify-between">
                             <>
-                                {application.status === "enrolled" ?
-                                    <Button
-                                    // variant={}
-                                        onClick={() => handleEnroll(application._id)}
-                                        variant="default"
-                                    >
-                                        Enroll
-                                    </Button> :
-                                    <Button
-                                        onClick={() => handleEnroll(application._id)}
-                                        variant="default"
-                                    >
-                                        Enroll
-                                    </Button>
-                                }
+                                <Button
+                                    onClick={() => handleEnroll(application._id)}
+                                    variant="default"
+                                    disabled={application.status === "enrolled"}
+                                >
+                                    Enroll
+                                </Button>
                                 <Button
                                     onClick={() => handleReject(application._id)}
                                     variant="destructive"
+                                    disabled={application.status === "rejected"}
                                 >
                                     Reject
                                 </Button>
