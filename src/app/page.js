@@ -3,7 +3,6 @@ import CourseSection from "@/components/ui/CourseSection/coursesection";
 import Header from "@/components/ui/Header/header";
 import Image from "next/image";
 import { auth } from "../../auth";
-export const dynamic = "force-dynamic";
 
 export default async function Home() {
 

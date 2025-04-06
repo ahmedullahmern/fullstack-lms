@@ -10,8 +10,8 @@ import { UserIcon } from "lucide-react";
 
 export default async function Header() {
     const session = await auth();
+    console.log("Auth In The Heafer==>", session)
     const isAdmin = session?.user?.role === 'admin';
-
     return (
         <header className="bg-slate-200 shadow-md">
             <div className="container mx-auto px-6 py-3 flex justify-between items-center">
@@ -46,7 +46,7 @@ export default async function Header() {
                     <SheetContent side="left">
                         <div className="flex flex-col space-y-4 mt-6">
                             <Link href="/" className="text-lg font-bold flex items-center gap-2">
-                                <GraduationCap className="w-6 h-6" /> LMS-APP
+                                <GraduationCap className="w-6 h-6" /> LMS
                             </Link>
                             {session ? (
                                 <>
